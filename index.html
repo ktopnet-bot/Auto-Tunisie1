@@ -767,15 +767,23 @@ function copyOut(t,ok){
  const fb=()=>{$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>Exporter</span></div><div class="pb"><p class="mut2">Copie automatique impossible. Appuyez longuement dans la zone, choisissez « Tout sélectionner », puis « Copier ».</p><textarea id="exo" rows="14" readonly></textarea></div></div>`;const a=$('#exo');a.value=t;a.focus();a.select()};
  try{navigator.clipboard.writeText(t).then(()=>toast(ok),fb)}catch(e){fb()}
 }
+function saveOut(t,name,mime,ok){
+ const stamp=today(),fn=name.replace('.','-'+stamp+'.');
+ let file=null;try{file=new File([(mime.includes('csv')?'\uFEFF':'')+t],fn,{type:mime})}catch(e){}
+ const dl=()=>{try{const u=URL.createObjectURL(file),a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('Fichier enregistré : '+fn)}catch(e){copyOut(t,ok)}};
+ if(!file){copyOut(t,ok);return}
+ if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){navigator.share({files:[file],title:fn}).then(()=>toast('Fichier partagé'),e=>{if(e&&e.name!=='AbortError')dl()});return}
+ dl();
+}
 function csv(){
  const d=calc();if(!d){toast('Aucune donnée');return}
  const q=v=>{v=String(v??'').replace(/\n/g,' ');return /[;"]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
  const rows=[['date','heure','type','km','km_depart','litres','prix_litre','montant_TND','carburant','reservoir_plein','station','conducteur','categorie','note','prochain_km','prochaine_date','elements']].concat([...d.e].sort((a,b)=>a.date.localeCompare(b.date)).map(x=>[x.date,x.time||'',IC[x.t][2],x.km||'',x.km0||'',x.l||'',x.p||'',x.t==='plein'?pt(x).toFixed(3):(x.cost||''),x.fuel||'',x.t==='plein'?(x.full?'oui':'non'):'',x.station||'',x.driver||'',x.svc||x.cat||x.title||'',x.note||'',x.nk||'',x.nd||'',x.items?x.items.map(i=>i.x).join('|'):'']));
- copyOut(rows.map(r=>r.map(q).join(';')).join('\n'),'CSV copié');
+ saveOut(rows.map(r=>r.map(q).join(';')).join('\n'),'auto-tunisie.csv','text/csv','CSV copié');
 }
 function backup(){
  if(!S.cars.length){toast('Aucune donnée');return}
- copyOut(JSON.stringify({v:1,cars:S.cars,es:S.es,types:S.types||null}),'Sauvegarde copiée');
+ saveOut(JSON.stringify({v:1,cars:S.cars,es:S.es,types:S.types||null}),'auto-tunisie-sauvegarde.json','application/json','Sauvegarde copiée');
 }
 const s2=v=>String(v??'').slice(0,200);
 const n2=v=>{const a=parseFloat(String(v??'').replace(/\s/g,'').replace(',','.'));return isFinite(a)&&a>=0?a:0};
@@ -859,7 +867,7 @@ document.addEventListener('click',e=>{
  if(D.a==='tpdel'){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}
   const o=tpL[+D.i];S.types=(S.types&&S.types.length?S.types:[...DEFTYPES]).filter(x=>x!==o);save();tpPage();return}
  if(D.close&&(t.tagName==='BUTTON'||e.target===t)){close();return}
- if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 1.9</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
+ if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 2.0</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
  if(D.a==='share'){shareSummary();return}
  if(D.a==='flt'){fltPage();return}
  if(D.a==='per'){perPage();return}
