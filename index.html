@@ -13,6 +13,9 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.35 Roboto,system-ui,-apple-system,"Segoe UI",sans-serif}
+body[data-tab=hist]{--hd:#673ab7}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body[data-tab=hist]{--hd:#4527a0}}
+:root[data-theme="dark"] body[data-tab=hist]{--hd:#4527a0}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--hd);color:#fff;display:flex;align-items:center;gap:8px;padding:10px 12px}
 header .car{flex:1;display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.12);border:0;border-radius:10px;color:#fff;text-align:left;padding:6px 10px;min-height:48px}
 .av{width:34px;height:34px;border-radius:50%;background:#e8eef0;color:var(--hd);display:grid;place-items:center;font-weight:700}
@@ -23,7 +26,8 @@ button{font:inherit;cursor:pointer}
 input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px;width:100%;min-height:44px}
 :focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 .tl{position:relative}
-.tl::before{content:"";position:absolute;left:23px;top:0;bottom:0;width:7px;background:repeating-linear-gradient(#333 0 10px,#aaa 10px 14px);border-radius:3px}
+.tl::before{content:"";position:absolute;left:19px;top:0;bottom:0;width:16px;background:#1c1c1c;border-radius:3px}
+.tl::after{content:"";position:absolute;left:26px;top:0;bottom:0;width:2px;background:repeating-linear-gradient(#fff 0 9px,transparent 9px 18px)}
 .it{position:relative;display:grid;grid-template-columns:54px 1fr;align-items:start;width:100%;text-align:left;background:none;border:0;color:inherit;padding:10px 0 0}
 .ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:19px;margin-left:4px;position:relative;z-index:1;color:#fff}
 .bd{border-bottom:1px solid var(--line);padding-bottom:10px;min-width:0}
@@ -156,9 +160,24 @@ label.lbad{color:var(--bad)}
 .rh{margin:12px 16px 6px;font-size:14px;letter-spacing:1.5px;color:var(--mut);font-weight:500}
 .rstrip{display:flex;gap:10px;overflow-x:auto;padding:0 16px 14px;border-bottom:1px solid var(--line);scrollbar-width:none}
 .rk{flex:0 0 auto;min-width:200px;max-width:260px;text-align:left;background:var(--sf);color:inherit;border:1px solid var(--line);border-left:4px solid;border-radius:12px;padding:10px 12px;font:inherit}
-.rk .rkt{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:500;margin-bottom:6px}
+.rk .rkn{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:500;margin-bottom:6px}
 .rci{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:14px}
 .rk .rkb{color:var(--mut);font-size:15px;margin-bottom:6px}.rk .rkc{font-size:15px;font-weight:500}
+.rt button[data-rt=plein][aria-current="true"]{color:#43a047;border-bottom-color:#43a047}
+.cn{margin-left:auto;color:var(--mut);font-size:17px}
+.gl{color:var(--mut);font-size:17px;display:flex;align-items:center;gap:8px}.gd{width:12px;height:12px;border:3px solid #43a047;border-radius:50%;display:inline-block;box-sizing:border-box}
+.gv{font-size:30px;font-weight:700;margin:4px 0 12px}
+.gb{position:relative;height:10px;border-radius:5px;background:linear-gradient(90deg,#c8e6c9,#eeeeee,#ffcdd2);margin:6px 0 14px}
+.gk{position:absolute;top:50%;width:18px;height:18px;border:3px solid #43a047;border-radius:50%;background:var(--bg);transform:translate(-50%,-50%);box-sizing:border-box}
+.gm2{position:absolute;top:-3px;width:3px;height:16px;background:#757575;transform:translateX(-50%)}
+.gr{display:flex;justify-content:space-between}.gr small{display:block;color:var(--mut);font-size:16px}.gr b{font-weight:500;font-size:19px}
+.ga{text-align:center;color:var(--mut);font-size:16px;margin-top:10px}.ga i{display:inline-block;width:3px;height:14px;background:#757575;vertical-align:middle;margin-right:4px}
+.stn{padding:12px 0;border-top:1px solid var(--line)}
+.sr1,.sr2{display:flex;justify-content:space-between;align-items:center;gap:8px}.sr1 b{font-weight:500;font-size:22px}.sp{display:flex;align-items:center;gap:8px}.sp b{font-size:19px}
+.sr2{color:var(--mut);font-size:16px;margin-top:4px}
+.bdg{border-radius:12px;padding:2px 8px;font-size:15px;font-weight:500}.bdg.dn{background:#e8f5e9;color:#2e7d32}.bdg.up{background:#ffebee;color:#d32f2f}
+.bg2{font-size:26px!important;font-weight:700!important}
+.pgr{display:flex;align-items:center;gap:14px;font-size:17px;color:var(--mut)}.pbar{flex:0 0 28%;height:8px;border-radius:4px;background:var(--sf);overflow:hidden}.pbar i{display:block;height:100%;background:#43a047}
 </style>
 <meta name="theme-color" content="#00747c">
 <link rel="manifest" href="manifest.json">
@@ -204,7 +223,7 @@ function tpSheet(i){
  $('#tpn').focus();
 }
 const DEP=['Parking','Péage','Lavage','Amende','Vignette','Assurance','Visite technique','Taxe','Autre'];
-const IC={plein:['⛽','#f59f00','Plein'],entretien:['🔧','#795548','Entretien'],depense:['💳','#e64a19','Dépense'],revenu:['💵','#2e7d32','Le revenu'],releve:['🔢','#c2185b','Relevé'],itineraire:['📍','#607d8b','Itinéraire'],rappel:['⏰','#673ab7','Rappel'],liste:['☑','#2196f3','Liste de contrôle']};
+const IC={plein:['⛽','#43a047','Plein'],entretien:['🔧','#795548','Entretien'],depense:['💳','#e64a19','Dépense'],revenu:['💵','#2e7d32','Le revenu'],releve:['🔢','#c2185b','Relevé'],itineraire:['📍','#607d8b','Itinéraire'],rappel:['⏰','#673ab7','Rappel'],liste:['☑','#2196f3','Liste de contrôle']};
 const ORDER=['rappel','liste','releve','itineraire','entretien','revenu','depense','plein'];
 const FORMS={
  plein:[['date','Date','date'],['km','Kilométrage (km)','number'],['l','Litres','number'],['p','Prix du litre (TND)','number'],['tot','Total (TND)','out'],['full','Réservoir plein','check']],
@@ -222,10 +241,10 @@ function calc(){
  const c=car();if(!c)return null;
  const e=S.es.filter(x=>x.car===c.id);
  const f=e.filter(x=>x.t==='plein').sort((a,b)=>a.km-b.km);
- const cons={},rng={},ivs=[];let last=null,acc=0,ld=null;
- f.forEach(x=>{if(last!==null)acc+=x.l;if(x.full){if(last!==null&&x.km>last){cons[x.id]=acc/(x.km-last)*100;rng[x.id]=x.km-last;ivs.push({km:x.km-last,days:Math.max(0,Math.round((new Date(x.date+'T00:00')-new Date(ld+'T00:00'))/864e5))})}last=x.km;ld=x.date;acc=0}});
+ const cons={},rng={},ckm={},ivs=[];let last=null,acc=0,ac=0,ld=null;
+ f.forEach(x=>{if(last!==null){acc+=x.l;ac+=pt(x)}if(x.full){if(last!==null&&x.km>last){cons[x.id]=acc/(x.km-last)*100;ckm[x.id]=ac/(x.km-last);rng[x.id]=x.km-last;ivs.push({km:x.km-last,days:Math.max(0,Math.round((new Date(x.date+'T00:00')-new Date(ld+'T00:00'))/864e5))})}last=x.km;ld=x.date;acc=0;ac=0}});
  const cur=Math.max(c.km0||0,...e.map(x=>x.km||0));
- return{c,e,f,cons,rng,ivs,cur};
+ return{c,e,f,cons,rng,ckm,ivs,cur};
 }
 const pt=x=>x.tot>0?x.tot:x.l*x.p;
 const amt=x=>x.t==='plein'?pt(x):(x.t==='entretien'||x.t==='depense')?+x.cost||0:0;
@@ -263,9 +282,9 @@ function remStrip(d){
   if(nk){const l=nk-d.cur;p.push(`<span class="st-${l<0?'late':'ok'}">${l>=0?'Dans '+nf(l,0)+' km':'Dépassé de '+nf(-l,0)+' km'}</span>`)}
   if(nd){const j=Math.round((new Date(nd+'T00:00')-T)/864e5);p.push(`<span class="st-${j<0?'late':'ok'}">${j===0?"Aujourd'hui":j>0?'Dans '+j+' j':'Il y a '+(-j)+' j'}</span>`)}
   return p.join(' · ')};
- if(nf_)cards.push(`<div class="rk" style="border-left-color:#ff9800"><div class="rkt"><span class="rci" style="background:#ff9800">⛽</span>Plein suivant</div><div class="rkb">${[nf(nf_.nk,0)+' km',nf_.nd?dshort(nf_.nd):''].filter(Boolean).join(' · ')}</div><div class="rkc">${stat(nf_.nk,nf_.nd)}</div></div>`);
+ if(nf_)cards.push(`<div class="rk" style="border-left-color:#43a047"><div class="rkn"><span class="rci" style="background:#43a047">⛽</span>Plein suivant</div><div class="rkb">${[nf(nf_.nk,0)+' km',nf_.nd?dshort(nf_.nd):''].filter(Boolean).join(' · ')}</div><div class="rkc">${stat(nf_.nk,nf_.nd)}</div></div>`);
  remItems(d).slice(0,6).forEach(z=>{const k=z.rows.find(r=>r.ic==='🔢'),dd=z.rows.find(r=>r.ic==='📅'),col=z.kind==='entretien'?'#795548':'#e64a19';
-  cards.push(`<button class="rk" style="border-left-color:${col}" ${z.auto?'data-open':'data-rem'}="${z.id}"><div class="rkt"><span class="rci" style="background:${col}">${z.kind==='entretien'?'🔧':'💳'}</span>${esc(z.type)}</div><div class="rkb">${[k?k.label:'',dd?dd.label:''].filter(Boolean).join(' · ')}</div><div class="rkc">${z.rows.map(r=>`<span class="st-${r.st}">${r.txt}</span>`).join(' · ')}</div></button>`)});
+  cards.push(`<button class="rk" style="border-left-color:${col}" ${z.auto?'data-open':'data-rem'}="${z.id}"><div class="rkn"><span class="rci" style="background:${col}">${z.kind==='entretien'?'🔧':'💳'}</span>${esc(z.type)}</div><div class="rkb">${[k?k.label:'',dd?dd.label:''].filter(Boolean).join(' · ')}</div><div class="rkc">${z.rows.map(r=>`<span class="st-${r.st}">${r.txt}</span>`).join(' · ')}</div></button>`)});
  return cards.length?`<div class="rh">RAPPELS</div><div class="rstrip">${cards.join('')}</div>`:'';
 }
 function hist(d){
@@ -401,13 +420,14 @@ function cusPage(){
 }
 const fbar=()=>`<div class="fb"><button data-a="per">📅 ${plabel()}</button></div>`;
 const RT=[['gen','GÉNÉRAL'],['plein','PLEIN'],['dep','DÉPENSE'],['rev','LE REVENU'],['ent','ENTRETIEN']];
-const C={plein:'#ff9800',dep:'#e64a19',ent:'#795548',rev:'#2e7d32',teal:'#0097a7',dist:'#607d8b'};
-const PAL=['#ff9800','#e64a19','#795548','#0097a7','#2e7d32','#673ab7','#c2185b','#607d8b'];
+const C={plein:'#43a047',dep:'#e64a19',ent:'#795548',rev:'#2e7d32',teal:'#0097a7',dist:'#607d8b'};
+const PAL=['#43a047','#e64a19','#795548','#0097a7','#2e7d32','#673ab7','#c2185b','#607d8b'];
 const dfull=x=>new Date(x+'T00:00').toLocaleDateString('fr-FR');
 function card(ic,col,title,total,subs,tl){
  return `<div class="cd"><div class="ch"><span class="cs" style="background:${col}">${ic}</span><span class="ct" style="color:${col}">${title}</span></div><div class="mut2">${tl||'Total'}</div><div class="tt" style="color:${col};--n:${String(total).length}">${total}</div><hr><div class="sb">${subs.map((z,i)=>`<div style="${i?'text-align:right':''}"><div class="mut2">${z[0]}</div><b>${z[1]}</b></div>`).join('')}</div></div>`;
 }
-const chartCard=(ic,t,inner)=>`<div class="cd"><div class="ch"><span class="cs" style="background:${C.teal}">${ic}</span><span style="color:${C.teal};font-size:22px;font-weight:500">${t}</span></div>${inner}</div>`;
+let ACC=C.teal;
+const chartCard=(ic,t,inner)=>`<div class="cd"><div class="ch"><span class="cs" style="background:${ACC}">${ic}</span><span style="color:${ACC};font-size:22px;font-weight:500">${t}</span></div>${inner}</div>`;
 function mlist(a,b){const o=[];let [y,m]=a.split('-').map(Number);const [y2,m2]=b.split('-').map(Number);while(y<y2||(y===y2&&m<=m2)){o.push(y+'-'+String(m).padStart(2,'0'));m++;if(m>12){m=1;y++}}return o}
 function ny(mx){const r=(mx||1)/4,p=Math.pow(10,Math.floor(Math.log10(r)));return [1,2,2.5,5,10].map(k=>k*p).find(k=>k>=r)}
 function bars(ms,series,e){
@@ -517,10 +537,44 @@ function lineC(pts,fmt,col,lab){
  [pts[0],pts[pts.length-1]].forEach((z,i)=>{g+=`<text x="${i?W-14:L}" y="${H-8}" text-anchor="${i?'end':'start'}" font-size="11" fill="var(--mut)">${z.date.slice(5,7)}/${z.date.slice(0,4)}</text>`});
  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" role="img" aria-label="${lab}">${g}</svg>`;
 }
+const GR='#43a047';
+function gauge(lab,last,mn,mx,av,fmt){
+ const pos=v=>mx>mn?Math.max(3,Math.min(97,3+(v-mn)/(mx-mn)*94)):50;
+ return `<div class="gl"><i class="gd"></i>${lab} — Dernier</div><div class="gv" style="color:${GR}">${fmt(last)}</div><div class="gb"><i class="gm2" style="left:${pos(av)}%"></i><i class="gk" style="left:${pos(last)}%"></i></div><div class="gr"><div><small>Inférieur</small><b>${fmt(mn)}</b></div><div style="text-align:right"><small>Plus grand</small><b>${fmt(mx)}</b></div></div><div class="ga"><i></i> Moyenne de la période ${fmt(av)}</div>`;
+}
+function pleinCards(d,R){
+ const f=R.f,n=f.length,cf=R.cf,L=R.L;let h='';
+ const pl=f.filter(x=>d.cons[x.id]);
+ let b=`<div class="ch"><span class="cs" style="background:${GR}">⛽</span><span class="ct" style="color:${GR}">Carburant</span><span class="cn">${n} enregistrement${n>1?'s':''}</span></div>`;
+ if(pl.length){
+  const cv=pl.map(x=>d.cons[x.id]),kv=pl.map(x=>d.ckm[x.id]);
+  const av=a=>a.reduce((u,v)=>u+v,0)/a.length;
+  b+=gauge('Consommation',cv[cv.length-1],Math.min(...cv),Math.max(...cv),av(cv),v=>nf(v,3)+' L/100km');
+  b+='<div style="height:18px"></div>'+gauge('Coût / Km',kv[kv.length-1],Math.min(...kv),Math.max(...kv),av(kv),v=>nf(v,3)+' TND');
+ }else b+='<div class="mut2" style="margin:6px 0 10px">Ajoutez au moins deux pleins (réservoir plein) pour voir la consommation.</div>';
+ b+=`<hr><div class="sb"><div><div class="mut2">Le volume</div><b>${nf(L,3)} L</b></div><div style="text-align:right"><div class="mut2">Coût total</div><b>${tnd(cf)}</b></div></div>`;
+ h+=`<div class="cd">${b}</div>`;
+ // stations
+ const st={};f.forEach(x=>{const k=(x.station||'').trim()||'Non spécifiée';const o=st[k]||(st[k]={n:0,l:0,c:0});o.n++;o.l+=x.l;o.c+=pt(x)});
+ const ov=L>0?cf/L:0,rows=Object.entries(st).sort((a,b)=>b[1].c-a[1].c);
+ if(rows.length)h+=`<div class="cd"><div class="ch"><span class="cs" style="background:${GR}">📍</span><span class="ct" style="color:${GR}">Stations service</span></div>${rows.map(([k,o],i)=>{const pr=o.l>0?o.c/o.l:0,pc=ov>0?(pr/ov-1)*100:0,dn=pc<=0;
+  return `<div class="stn"${i?'':' style="border-top:0"'}><div class="sr1"><b>${esc(k)}</b><span class="sp"><b>${tnd(pr)}</b><span class="bdg ${dn?'dn':'up'}">${dn?'▼':'▲'} ${nf(Math.abs(pc),1)}%</span></span></div><div class="sr2"><span>${o.n} enregistrement${o.n>1?'s':''} · ${nf(o.l,3)} L</span><span>${tnd(o.c)}</span></div></div>`}).join('')}</div>`;
+ // habitudes
+ if(n>=2){
+  const ks=f.map(x=>x.km),span=Math.max(1,Math.round((new Date(f[n-1].date+'T00:00')-new Date(f[0].date+'T00:00'))/864e5));
+  const gap=(Math.max(...ks)-Math.min(...ks))/(n-1),freq=span/(n-1),fu=f.filter(x=>x.full).length;
+  const rg=f.map(x=>d.rng[x.id]).filter(Boolean),avC=R.avg;
+  const aut=d.c.tank&&avC?d.c.tank/avC*100:(rg.length?rg.reduce((u,v)=>u+v,0)/rg.length:0);
+  const pct=fu/n*100;
+  h+=`<div class="cd"><div class="ch"><span class="cs" style="background:${GR}">📈</span><span class="ct" style="color:${GR}">Habitudes de ravitaillement</span></div><div class="sb"><div><div class="mut2">Entre les ravitaillements</div><b class="bg2">${nf(gap,0)} km</b></div><div style="text-align:right"><div class="mut2">Fréquence</div><b class="bg2">${nf(freq,0)} Jour${Math.round(freq)>1?'s':''}</b></div></div><div class="sb" style="margin-top:14px"><div><div class="mut2">Autonomie estimée</div><b class="bg2">${aut?nf(aut,0)+' km':'–'}</b></div><div style="text-align:right"><div class="mut2">Projection mensuelle</div><b class="bg2">${tnd(cf/span*30)}</b></div></div><hr><div class="pgr"><div class="pbar"><i style="width:${pct}%"></i></div><span>${fu} ravitaillement${fu>1?'s':''} sur ${n} avec le réservoir plein (${nf(pct,1)}%) — la moyenne est calculée d'un plein à l'autre.</span></div></div>`;
+ }
+ return h;
+}
 function reports(d){
  const R=rstats(d),e=R.e;
  const pb=`<button class="ib" style="color:${C.teal};min-width:44px;min-height:44px" data-a="per" aria-label="Choisir la période">${SC}</button>`;
- let h=`<div class="rkt">${RT.map(([k,l])=>`<button data-rt="${k}" aria-current="${rtab===k}">${l}</button>`).join('')}</div><div class="rp">`;
+ ACC=C.teal;
+ let h=`<div class="rt">${RT.map(([k,l])=>`<button data-rt="${k}" aria-current="${rtab===k}">${l}</button>`).join('')}</div><div class="rp">`;
  if(!e.length)return h+`<div class="dr"><span>0 entrée</span>${pb}</div><div class="emp">Aucune entrée avec ce filtre.${nFil()?'<br><button class="btn g" data-a="flt" style="margin-top:12px">Modifier le filtre</button>':''}</div></div>`;
  const {d0,d1,days,dist,cf,cd,ce,rev,cost,f,cs,avg,L}=R;
  const per_=v=>[['Par jour',tnd(v/days)],['Par km',dist>0?tnd(v/dist):'–']];
@@ -539,11 +593,12 @@ function reports(d){
   h+=chartCard('📈','Graphique du compteur kilométrique',odo(e));
  }
  if(rtab==='plein'){
-  h+=grid(card('⛽',C.plein,'Carburant',tnd(cf),per_(cf)),
-   card('⛽',C.plein,'Litres',nf(L,3)+' L',[['Par plein',f.length?nf(L/f.length,3)+' L':'–'],['Prix moyen / L',L?tnd(cf/L):'–']].concat(d.c.tank&&R.avg?[['Autonomie estimée',nf(d.c.tank/R.avg*100,0)+' km']]:[])),
+  ACC=GR;h+=pleinCards(d,R);
+  h+=grid(card('⛽',GR,'Coût du carburant',tnd(cf),per_(cf)),
+   card('⛽','#43a047','Litres',nf(L,3)+' L',[['Par plein',f.length?nf(L/f.length,3)+' L':'–'],['Prix moyen / L',L?tnd(cf/L):'–']].concat(d.c.tank&&R.avg?[['Autonomie estimée',nf(d.c.tank/R.avg*100,0)+' km']]:[])),
    card('📈',C.teal,'Consommation',cs.length?nf(avg,3)+' L/100km':'–',[['Meilleure',cs.length?nf(Math.min(...cs),3):'–'],['Moins bonne',cs.length?nf(Math.max(...cs),3):'–']].concat((()=>{const r=f.map(x=>d.rng[x.id]).filter(Boolean);return r.length?[['Autonomie réelle',nf(r.reduce((u,v)=>u+v,0)/r.length,0)+' km / plein']]:[]})()),'Moyenne'));
-  h+=chartCard('▥','Coût mensuel du carburant',bars(ms,[{n:'Plein',c:C.plein,f:x=>x.t==='plein'?pt(x):0}],e));
-  h+=chartCard('📈','Graphique de consommation (L/100 km)',lineC(f.filter(x=>d.cons[x.id]).map(x=>({date:x.date,v:d.cons[x.id]})),v=>nf(v,1),C.teal,'Consommation par plein'));
+  h+=chartCard('▥','Graphique des dépenses mensuelles',bars(ms,[{n:'Plein',c:C.plein,f:x=>x.t==='plein'?pt(x):0}],e));
+  h+=chartCard('📈','Graphique de consommation (L/100 km)',lineC(f.filter(x=>d.cons[x.id]).map(x=>({date:x.date,v:d.cons[x.id]})),v=>nf(v,1),GR,'Consommation par plein'));
   h+=chartCard('📈','Graphique du prix du litre (TND)',lineC(f.filter(x=>x.p>0).map(x=>({date:x.date,v:x.p})),v=>nf(v,3),C.plein,'Prix du litre'));
  }
  if(rtab==='dep'){h+=grid(card('↘',C.dep,'Dépense',tnd(cd),per_(cd)));h+=chartCard('▥','Dépenses par mois',bars(ms,[{n:'Dépense',c:C.dep,f:x=>x.t==='depense'?+x.cost||0:0}],e));h+=chartCard('◔','Dépenses par catégorie',donut(by('depense','cat')))}
@@ -552,6 +607,7 @@ function reports(d){
  return h+'</div>';
 }
 function render(){
+ document.body.dataset.tab=tab;
  $('#hd').style.background=tab==='rem'?'#673ab7':'';
  const d=calc(),c=d&&d.c;
  $('#hd').innerHTML=`<button class="car" data-a="cars"><div class="av">${c?esc(c.name[0].toUpperCase()):'+'}</div><div><b>${c?esc(c.name):'Ajouter une voiture'}</b><small>${c?esc((c.model||c.fuel)+' · '+kmf(d.cur)):'Touchez ici'}</small></div></button>${hbtn()}`;
@@ -803,7 +859,7 @@ document.addEventListener('click',e=>{
  if(D.a==='tpdel'){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}
   const o=tpL[+D.i];S.types=(S.types&&S.types.length?S.types:[...DEFTYPES]).filter(x=>x!==o);save();tpPage();return}
  if(D.close&&(t.tagName==='BUTTON'||e.target===t)){close();return}
- if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 1.6</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
+ if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 1.9</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
  if(D.a==='share'){shareSummary();return}
  if(D.a==='flt'){fltPage();return}
  if(D.a==='per'){perPage();return}
