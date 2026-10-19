@@ -294,7 +294,7 @@ function hist(d){
  let h=(q?'':remStrip(d))+'<div class="tl">',cm=null;const now=today().slice(0,7);
  es.forEach(x=>{const m=x.date.slice(0,7);
   if(m!==cm&&m<now&&!q){const s=mstat(d,m),p=mstat(d,prevKey(m));
-   let cmp='';if(s.avg&&p.avg){const pc=Math.round(Math.abs(s.avg-p.avg)/p.avg*100);cmp=`<div>Consommation ${pc}% ${s.avg<=p.avg?'en dessous de':'au-dessus de'} ${mname(prevKey(m),{month:'long'})}</div>`}
+   let cmp='';if(s.avg&&p.avg){const pc=Math.round(Math.abs(s.avg-p.avg)/p.avg*100);cmp=`<div>Consommation <b style="color:${s.avg<=p.avg?'var(--ok)':'var(--bad)'}">${s.avg<=p.avg?'-':'+'}${pc}%</b> par rapport à ${mname(prevKey(m),{month:'long'})}</div>`}
    h+=`<div class="mc"><h4>${mname(m,{month:'long',year:'numeric'}).toUpperCase()}</h4><div>${tnd(s.cost)} · ${nf(s.dist,0)} km${s.avg?' · '+nf(s.avg,3)+' L/100km':''}</div>${s.aut?`<div style="color:var(--mut)">Autonomie réelle du réservoir : <b style="color:var(--fg)">${nf(s.aut,0)} km par plein</b></div>`:''}${cmp}</div>`}
   cm=m;h+=row(d,x)});
  return h+'</div>';
@@ -867,7 +867,7 @@ document.addEventListener('click',e=>{
  if(D.a==='tpdel'){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}
   const o=tpL[+D.i];S.types=(S.types&&S.types.length?S.types:[...DEFTYPES]).filter(x=>x!==o);save();tpPage();return}
  if(D.close&&(t.tagName==='BUTTON'||e.target===t)){close();return}
- if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 2.0</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
+ if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 2.1</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
  if(D.a==='share'){shareSummary();return}
  if(D.a==='flt'){fltPage();return}
  if(D.a==='per'){perPage();return}
