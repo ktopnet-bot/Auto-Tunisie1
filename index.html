@@ -176,8 +176,11 @@ label.lbad{color:var(--bad)}
 .sr1,.sr2{display:flex;justify-content:space-between;align-items:center;gap:8px}.sr1 b{font-weight:500;font-size:22px}.sp{display:flex;align-items:center;gap:8px}.sp b{font-size:19px}
 .sr2{color:var(--mut);font-size:16px;margin-top:4px}
 .bdg{border-radius:12px;padding:2px 8px;font-size:15px;font-weight:500}.bdg.dn{background:#e8f5e9;color:#2e7d32}.bdg.up{background:#ffebee;color:#d32f2f}
-.bg2{font-size:26px!important;font-weight:700!important}
+.bg2{font-size:22px!important;font-weight:700!important}
 .pgr{display:flex;align-items:center;gap:14px;font-size:17px;color:var(--mut)}.pbar{flex:0 0 28%;height:8px;border-radius:4px;background:var(--sf);overflow:hidden}.pbar i{display:block;height:100%;background:#43a047}
+.cg>*{min-width:0}.cd{max-width:100%;overflow-wrap:anywhere}
+.sl{display:flex;flex-direction:column;gap:8px}.sli{display:flex;flex-direction:column;gap:0}.sli b{font-weight:500;font-size:19px}.sli .mut2{font-size:16px}
+@media (max-width:389px){.cg{grid-template-columns:1fr}}
 </style>
 <meta name="theme-color" content="#00747c">
 <link rel="manifest" href="manifest.json">
@@ -424,7 +427,7 @@ const C={plein:'#43a047',dep:'#e64a19',ent:'#795548',rev:'#2e7d32',teal:'#0097a7
 const PAL=['#43a047','#e64a19','#795548','#0097a7','#2e7d32','#673ab7','#c2185b','#607d8b'];
 const dfull=x=>new Date(x+'T00:00').toLocaleDateString('fr-FR');
 function card(ic,col,title,total,subs,tl){
- return `<div class="cd"><div class="ch"><span class="cs" style="background:${col}">${ic}</span><span class="ct" style="color:${col}">${title}</span></div><div class="mut2">${tl||'Total'}</div><div class="tt" style="color:${col};--n:${String(total).length}">${total}</div><hr><div class="sb">${subs.map((z,i)=>`<div style="${i?'text-align:right':''}"><div class="mut2">${z[0]}</div><b>${z[1]}</b></div>`).join('')}</div></div>`;
+ return `<div class="cd"><div class="ch"><span class="cs" style="background:${col}">${ic}</span><span class="ct" style="color:${col}">${title}</span></div><div class="mut2">${tl||'Total'}</div><div class="tt" style="color:${col};--n:${String(total).length}">${total}</div><hr>${subs.length>2?`<div class="sl">${subs.map(z=>`<div class="sli"><span class="mut2">${z[0]}</span><b>${z[1]}</b></div>`).join('')}</div>`:`<div class="sb">${subs.map((z,i)=>`<div style="${i?'text-align:right':''}"><div class="mut2">${z[0]}</div><b>${z[1]}</b></div>`).join('')}</div>`}</div>`;
 }
 let ACC=C.teal;
 const chartCard=(ic,t,inner)=>`<div class="cd"><div class="ch"><span class="cs" style="background:${ACC}">${ic}</span><span style="color:${ACC};font-size:22px;font-weight:500">${t}</span></div>${inner}</div>`;
@@ -867,7 +870,7 @@ document.addEventListener('click',e=>{
  if(D.a==='tpdel'){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}
   const o=tpL[+D.i];S.types=(S.types&&S.types.length?S.types:[...DEFTYPES]).filter(x=>x!==o);save();tpPage();return}
  if(D.close&&(t.tagName==='BUTTON'||e.target===t)){close();return}
- if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 2.1</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
+ if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 2.2</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
  if(D.a==='share'){shareSummary();return}
  if(D.a==='flt'){fltPage();return}
  if(D.a==='per'){perPage();return}
