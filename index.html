@@ -399,7 +399,7 @@ function rappelForm(x){
    const o={car:st.car,t:'rappel',kind:st.kind,type:st.type,title:st.type,rep:st.rep,uk:st.uk,ud:st.ud,
     nk:st.uk&&!st.rep?Math.round(num(st.nk)):0,nd:st.ud&&!st.rep?st.nd:'',
     ik:st.uk&&st.rep?Math.round(num(st.nk)):0,iv:st.ud&&st.rep?Math.round(num(st.iv)):0,iu:st.iu,note:st.note.trim()};
-   if(x){const z=S.es.find(q=>q.id===editId);Object.assign(z,o);if(st.rep){z.sk=z.sk||curOf(st.car);z.sd=z.sd||today()}}
+   o.u=Date.now();if(x){const z=S.es.find(q=>q.id===editId);Object.assign(z,o);if(st.rep){z.sk=z.sk||curOf(st.car);z.sd=z.sd||today()}}
    else S.es.push({id:uid(),date:today(),sk:curOf(st.car),sd:today(),...o});
    editId=null;S.sel=st.car;save();close();render()};
   const del=$('#r_del');if(del)del.onclick=()=>{if(!del.dataset.arm){del.dataset.arm=1;del.textContent='CONFIRMER ?';return}
@@ -611,7 +611,7 @@ function reports(d){
 }
 function render(){
  document.body.dataset.tab=tab;
- $('#hd').style.background=tab==='rem'?'#673ab7':'';
+
  const d=calc(),c=d&&d.c;
  $('#hd').innerHTML=`<button class="car" data-a="cars"><div class="av">${c?esc(c.name[0].toUpperCase()):'+'}</div><div><b>${c?esc(c.name):'Ajouter une voiture'}</b><small>${c?esc((c.model||c.fuel)+' · '+kmf(d.cur)):'Touchez ici'}</small></div></button>${hbtn()}`;
  $('#sr').innerHTML=sch?`<div class="sr" style="background:var(--hd)"><input id="q" value="${esc(q)}" placeholder="Rechercher" aria-label="Rechercher"></div>`:'';
@@ -623,7 +623,7 @@ function render(){
  else if(tab==='hist')h=fbar()+hist(d);
  else if(tab==='rap')h=reports(d);
  else if(tab==='rem')h=remList(d);
- else h=`<h2>Plus</h2><div class="acts" style="flex-direction:column"><button class="btn g" data-a="addcar">Ajouter une voiture</button><button class="btn g" data-a="theme">Thème clair / sombre</button><button class="btn g" data-a="csv">Exporter (CSV)</button><button class="btn g" data-a="json">Sauvegarde complète (JSON)</button><button class="btn g" data-a="imp">Importer</button><button class="btn g" data-a="types">Type d'entretiens</button><button class="btn g" data-a="about">À propos</button></div><p class="mut2" style="text-align:center;margin-top:28px">Créé par Kamel Nasralli</p>`;
+ else h=`<h2>Plus</h2><div class="acts" style="flex-direction:column"><button class="btn g" data-a="addcar">Ajouter une voiture</button><button class="btn g" data-a="theme">Thème clair / sombre</button><button class="btn g" data-a="gd">Google Drive (synchronisation)</button><button class="btn g" data-a="csv">Exporter (CSV)</button><button class="btn g" data-a="json">Sauvegarde complète (JSON)</button><button class="btn g" data-a="imp">Importer</button><button class="btn g" data-a="types">Type d'entretiens</button><button class="btn g" data-a="about">À propos</button></div><p class="mut2" style="text-align:center;margin-top:28px">Créé par Kamel Nasralli</p>`;
  $('#app').innerHTML=h;
 }
 function carsList(){
@@ -664,7 +664,7 @@ const curOf=id=>{const c=S.cars.find(z=>z.id===id);return Math.max(c.km0||0,...S
 let editId=null;
 const lastKm=(id,dt,ex)=>Math.max(S.cars.find(z=>z.id===id).km0||0,...S.es.filter(q=>q.car===id&&q.km&&q.id!==ex&&q.date<=dt).map(q=>q.km));
 function buzz(){try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}}
-function upsert(o){if(editId){Object.assign(S.es.find(q=>q.id===editId),o)}else S.es.push({id:uid(),...o});editId=null}
+function upsert(o){o.u=Date.now();if(editId){Object.assign(S.es.find(q=>q.id===editId),o)}else S.es.push({id:uid(),...o});editId=null}
 let tried=false,gT=null,gTried=false;
 const nr=/^\d+([.,]\d+)?$/;
 function pErrs(){
@@ -752,8 +752,8 @@ function gShow(E){
 function saveNew(t){
  const d=calc(),x=buildX(t,d);gTried=true;const E=gErrs(t,x,d);gShow(E);
  if(E.length){buzz();toast('Corrigez les champs en rouge');const f=$('#f_'+E[0][0]);if(f){f.scrollIntoView({block:'center'});f.focus()}return}
- if(!x.date)x.date=today();
- if(editId){const z=S.es.find(q=>q.id===editId);Object.assign(z,x,{id:z.id,car:z.car});editId=null}else S.es.push(x);
+ if(!x.date)x.date=today();x.u=Date.now();
+ if(editId){const z=S.es.find(q=>q.id===editId);Object.assign(z,x,{id:z.id,car:z.car,u:x.u});editId=null}else S.es.push(x);
  save();close();render();
 }
 ['input','change'].forEach(ev=>document.addEventListener(ev,e=>{
@@ -770,12 +770,79 @@ function copyOut(t,ok){
  const fb=()=>{$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>Exporter</span></div><div class="pb"><p class="mut2">Copie automatique impossible. Appuyez longuement dans la zone, choisissez « Tout sélectionner », puis « Copier ».</p><textarea id="exo" rows="14" readonly></textarea></div></div>`;const a=$('#exo');a.value=t;a.focus();a.select()};
  try{navigator.clipboard.writeText(t).then(()=>toast(ok),fb)}catch(e){fb()}
 }
+/* ===== Google Drive ===== */
+const GK='carnet-gid',GL='carnet-gsync',GF='auto-tunisie-sync.json',GSC='https://www.googleapis.com/auth/drive.file';
+let gTok=null,gExp=0,gBusy=false;
+const gid=()=>{try{return localStorage.getItem(GK)||''}catch(e){return ''}};
+const glast=()=>{try{return localStorage.getItem(GL)||''}catch(e){return ''}};
+function gLoad(){return new Promise((ok,ko)=>{if(window.google&&google.accounts&&google.accounts.oauth2)return ok();const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.onload=()=>ok();s.onerror=()=>ko(new Error('Connexion à Google impossible. Vérifiez Internet.'));document.head.appendChild(s)})}
+function gToken(){return new Promise(async(ok,ko)=>{
+ if(gTok&&Date.now()<gExp-60000)return ok(gTok);
+ try{await gLoad()}catch(e){return ko(e)}
+ const cid=gid();if(!cid)return ko(new Error('Client ID manquant'));
+ try{const tc=google.accounts.oauth2.initTokenClient({client_id:cid,scope:GSC,
+  callback:r=>{if(r.error)return ko(new Error(r.error==='access_denied'?'Accès refusé':(r.error_description||r.error)));gTok=r.access_token;gExp=Date.now()+(+r.expires_in||3600)*1000;ok(gTok)},
+  error_callback:e=>ko(new Error(e&&e.type==='popup_closed'?'Fenêtre Google fermée':e&&e.type==='popup_failed_to_open'?'Le navigateur a bloqué la fenêtre Google':'Erreur Google ('+(e&&e.type||'inconnue')+')'))});
+  tc.requestAccessToken({})}catch(e){ko(e)}
+})}
+async function gf(url,opt){const t=await gToken();opt=opt||{};opt.headers=Object.assign({Authorization:'Bearer '+t},opt.headers||{});
+ let r;try{r=await fetch(url,opt)}catch(e){throw new Error('Réseau indisponible')}
+ if(r.status===401)gTok=null;
+ if(!r.ok){let m='';try{m=(await r.json()).error.message}catch(e){}throw new Error('Drive '+r.status+(m?' : '+m:''))}
+ return r}
+async function gFind(){const q=encodeURIComponent("name='"+GF+"' and trashed=false");
+ const j=await(await gf('https://www.googleapis.com/drive/v3/files?q='+q+'&fields=files(id,modifiedTime)&orderBy=modifiedTime%20desc&pageSize=1')).json();
+ return j.files&&j.files[0]||null}
+function gMerge(j){
+ if(!j||!Array.isArray(j.cars)||!Array.isArray(j.es))throw new Error('Fichier Drive non reconnu');
+ S.del=[...new Set([...(S.del||[]),...(Array.isArray(j.del)?j.del.map(s2):[])])];
+ const dl=new Set(S.del);let add=0,upd=0;
+ j.cars.forEach(c=>{if(!c||!c.id||!c.name||dl.has(c.id))return;
+  const o={id:s2(c.id),name:s2(c.name),model:s2(c.model),plate:s2(c.plate),fuel:s2(c.fuel)||'Essence',tank:n2(c.tank),km0:n2(c.km0),u:+c.u||0};
+  const l=S.cars.find(z=>z.id===o.id);if(!l){S.cars.push(o);add++}else if(o.u>(l.u||0)){Object.assign(l,o);upd++}});
+ j.es.forEach(x=>{if(!x||dl.has(x.id)||!S.cars.some(z=>z.id===x.car))return;
+  const e=norm(x);if(typeof e==='string')return;e.u=+x.u||0;
+  const i=S.es.findIndex(q=>q.id===e.id);
+  if(i<0){S.es.push(e);add++;if(e.t==='entretien'&&!types().includes(e.svc))S.types=[...types(),e.svc]}
+  else if(e.u>(S.es[i].u||0)){S.es[i]=e;upd++}});
+ S.cars=S.cars.filter(c=>!dl.has(c.id));S.es=S.es.filter(e=>!dl.has(e.id)&&S.cars.some(c=>c.id===e.car));
+ if(Array.isArray(j.types))S.types=[...new Set([...types(),...j.types.map(s2)])];
+ if(!S.cars.some(c=>c.id===S.sel))S.sel=S.cars[0]?S.cars[0].id:'';
+ return{add,upd}}
+function gStat(){const e=$('#gds');if(!e)return;const l=glast();e.textContent=l?'Dernière synchronisation : '+new Date(l).toLocaleString('fr-FR'):'Jamais synchronisé.'}
+function gdStore(show){const el=$('#gdc');if(!el)return false;const v=el.value.trim();
+ if(!/^[\w.-]+\.apps\.googleusercontent\.com$/.test(v)){el.classList.add('bad');buzz();toast('Client ID non valide');el.focus();return false}
+ el.classList.remove('bad');try{localStorage.setItem(GK,v)}catch(e){}if(show)toast('Client ID enregistré');return true}
+async function gSync(){
+ if(gBusy)return;gBusy=true;
+ const out=$('#gdo'),say=(m,c)=>{if($('#gdo'))$('#gdo').innerHTML=`<div style="color:${c||'var(--fg)'};font-size:17px" role="status">${m}</div>`};
+ try{
+  say('Connexion à Google…');
+  const f=await gFind();let r={add:0,upd:0};
+  if(f){say('Lecture du fichier Drive…');const d=await gf('https://www.googleapis.com/drive/v3/files/'+f.id+'?alt=media');let j;try{j=await d.json()}catch(e){throw new Error('Fichier Drive illisible')}r=gMerge(j);save();render()}
+  say('Envoi vers Drive…');
+  const body=JSON.stringify({v:2,cars:S.cars,es:S.es,types:S.types||null,del:S.del||[]});
+  if(f)await gf('https://www.googleapis.com/upload/drive/v3/files/'+f.id+'?uploadType=media',{method:'PATCH',headers:{'Content-Type':'application/json'},body});
+  else{const b='b'+uid()+uid();await gf('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',{method:'POST',headers:{'Content-Type':'multipart/related; boundary='+b},body:`--${b}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify({name:GF,mimeType:'application/json'})}\r\n--${b}\r\nContent-Type: application/json\r\n\r\n${body}\r\n--${b}--`})}
+  save();try{localStorage.setItem(GL,new Date().toISOString())}catch(e){}
+  say('✓ Synchronisation terminée'+(f?' : '+r.add+' ajout(s) et '+r.upd+' mise(s) à jour reçus de Drive.':' : première sauvegarde envoyée.'),'var(--ok)');gStat();
+ }catch(e){say(esc(e.message||String(e)),'var(--bad)');buzz()}
+ gBusy=false}
+function gdPage(){
+ $('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>Google Drive</span></div><div class="pb">
+ <p class="mut2" style="margin-top:0">Sauvegarde et synchronise vos données dans votre Google Drive (fichier « ${GF} »). Avec le même compte Google, vos téléphones restent à jour.</p>
+ <label for="gdc">Client ID Google</label><input id="gdc" value="${esc(gid())}" placeholder="123456-abc.apps.googleusercontent.com" autocomplete="off" autocapitalize="off" spellcheck="false">
+ <div class="mut2" id="gds" style="margin:12px 0"></div>
+ <div class="acts"><button class="btn" data-a="gdsync">Synchroniser maintenant</button><button class="btn g" data-a="gdsave">Enregistrer l'ID</button></div>
+ <div id="gdo" style="margin-top:14px"></div>
+ <p class="mut2" style="font-size:15px;margin-top:22px">La synchronisation fusionne : les entrées ajoutées ou modifiées sur un téléphone apparaissent sur l'autre, et les suppressions sont aussi transmises. Pensez à synchroniser après chaque série de modifications.</p></div></div>`;
+ gStat()}
 function saveOut(t,name,mime,ok){
  const stamp=today(),fn=name.replace('.','-'+stamp+'.');
  let file=null;try{file=new File([(mime.includes('csv')?'\uFEFF':'')+t],fn,{type:mime})}catch(e){}
  const dl=()=>{try{const u=URL.createObjectURL(file),a=document.createElement('a');a.href=u;a.download=fn;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('Fichier enregistré : '+fn)}catch(e){copyOut(t,ok)}};
  if(!file){copyOut(t,ok);return}
- if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){navigator.share({files:[file],title:fn}).then(()=>toast('Fichier partagé'),e=>{if(e&&e.name!=='AbortError')dl()});return}
+ if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){navigator.share({files:[file]}).then(()=>toast('Fichier partagé'),e=>{if(e&&e.name!=='AbortError')dl()});return}
  dl();
 }
 function csv(){
@@ -856,6 +923,9 @@ function doImport(){
 document.addEventListener('click',e=>{
  const t=e.target.closest('button,[data-close]');if(!t)return;const D=t.dataset;
  if(D.tpclose){$('#tps').innerHTML='';return}
+ if(D.a==='gd'){gdPage();return}
+ if(D.a==='gdsave'){gdStore(true);return}
+ if(D.a==='gdsync'){if(gdStore(false))gSync();return}
  if(D.a==='json'){backup();return}
  if(D.a==='imp'){impPage();return}
  if(D.a==='imrun'){doImport();return}
@@ -870,7 +940,7 @@ document.addEventListener('click',e=>{
  if(D.a==='tpdel'){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}
   const o=tpL[+D.i];S.types=(S.types&&S.types.length?S.types:[...DEFTYPES]).filter(x=>x!==o);save();tpPage();return}
  if(D.close&&(t.tagName==='BUTTON'||e.target===t)){close();return}
- if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 2.2</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
+ if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 2.4</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
  if(D.a==='share'){shareSummary();return}
  if(D.a==='flt'){fltPage();return}
  if(D.a==='per'){perPage();return}
@@ -884,7 +954,7 @@ document.addEventListener('click',e=>{
  if(D.edit){const z=S.es.find(q=>q.id===D.edit);if(z)newForm(z.t,z);return}
  if(D.open){detail(D.open);return}
  if(D.ck){const [id,n]=D.ck.split(':'),x=S.es.find(z=>z.id===id);x.items[n].d=t.checked;save();return}
- if(D.del){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}S.es=S.es.filter(x=>x.id!==D.del);save();close();render();return}
+ if(D.del){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}(S.del=S.del||[]).push(D.del);S.es=S.es.filter(x=>x.id!==D.del);save();close();render();return}
  if(D.ok){D.ok==='plein'?savePlein():saveNew(D.ok);return}
  if(D.a==='more'){$('#p_more').hidden=false;t.hidden=true;return}
  if(D.a==='fab'){menu=!menu;render();return}
@@ -897,10 +967,10 @@ document.addEventListener('click',e=>{
  if(D.a==='editcar'){carForm(S.cars.find(c=>c.id===D.cid));return}
  if(D.a==='delcar'){const c=S.cars.find(z=>z.id===D.cid);if(!c)return;const n=S.es.filter(x=>x.car===c.id).length;
   if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer'+(n?' (+ '+n+' entrée'+(n>1?'s':'')+')':'')+' ?';return}
-  S.cars=S.cars.filter(z=>z.id!==c.id);S.es=S.es.filter(x=>x.car!==c.id);if(S.sel===c.id)S.sel=S.cars[0]?S.cars[0].id:'';save();close();render();toast('Voiture supprimée');return}
+  (S.del=S.del||[]).push(c.id);S.cars=S.cars.filter(z=>z.id!==c.id);S.es=S.es.filter(x=>x.car!==c.id);if(S.sel===c.id)S.sel=S.cars[0]?S.cars[0].id:'';save();close();render();toast('Voiture supprimée');return}
  if(D.a==='savecar'){const n=$('#cn').value.trim();if(!n){$('#cn').focus();return}
   const tk=num($('#ct').value);if($('#ct').value.trim()&&!(tk>0&&tk<=500)){$('#ct').classList.add('shake');$('#ct').focus();toast('Capacité non valide');return}
-  const o={name:n,model:$('#cm').value.trim(),plate:$('#cp').value.trim(),fuel:$('#cf').value,tank:tk>0?tk:0,km0:+$('#ck0').value||0};
+  const o={u:Date.now(),name:n,model:$('#cm').value.trim(),plate:$('#cp').value.trim(),fuel:$('#cf').value,tank:tk>0?tk:0,km0:+$('#ck0').value||0};
   if(D.cid){Object.assign(S.cars.find(c=>c.id===D.cid),o)}else{const c={id:uid(),...o};S.cars.push(c);S.sel=c.id}
   save();close();render()}
 });
