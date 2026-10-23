@@ -279,10 +279,25 @@ i.a{background:var(--peri)}i.b{background:var(--bar2)}
 .sheet{border-radius:28px 28px 0 0;background:var(--bg)}.sheet .bd{background:none;padding:0;box-shadow:none}
 .toast{background:var(--ink)}
 input,select,textarea{background:var(--card)}
+/* v3.1 : menu compact + centrage paysage */
+.menu{min-width:0;width:min(250px,calc(100% - 48px));padding:8px;border-radius:22px;box-shadow:0 18px 40px rgba(20,23,43,.28);bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.menu button{padding:5px 8px;gap:12px;font-size:16px;font-weight:700;min-height:40px;border-radius:14px}
+.menu button:active{background:var(--sf)}
+.menu .ic{width:30px;height:30px;font-size:15px}
+nav{left:50%;right:auto;transform:translateX(-50%);width:min(568px,calc(100% - 32px))}
+@media (min-width:640px){
+ header{padding-left:calc((100% - 600px)/2 + 16px);padding-right:calc((100% - 600px)/2 + 16px)}
+ main,.rp{max-width:600px}
+ .rt{margin:0 auto;max-width:600px;padding:0;justify-content:center}
+ .rt button{flex:0 1 auto}
+ .rp{margin:0 auto;padding:6px 16px 20px;background:none}
+ body{background:var(--bg)}
+}
+nav{display:block;padding:0 8px}
+nav>div,nav div{display:grid;grid-template-columns:1fr 1fr 64px 1fr 1fr;width:100%;max-width:none;height:100%;align-items:center;justify-items:center;margin:0}
+nav button.t{width:100%}
+@media (max-height:520px){.menu{width:min(440px,calc(100% - 48px));display:grid;grid-template-columns:1fr 1fr;bottom:calc(84px + env(safe-area-inset-bottom,0px));max-height:calc(100% - 100px);overflow:auto}.menu button{font-size:15px;min-height:36px}nav{height:58px;bottom:calc(10px + env(safe-area-inset-bottom,0px))}}
 </style>
-<meta name="theme-color" content="#14172b">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 <header id="hd"></header>
@@ -1058,7 +1073,7 @@ document.addEventListener('click',e=>{
  if(D.a==='tpdel'){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}
   const o=tpL[+D.i];S.types=(S.types&&S.types.length?S.types:[...DEFTYPES]).filter(x=>x!==o);save();tpPage();return}
  if(D.close&&(t.tagName==='BUTTON'||e.target===t)){close();return}
- if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 3.0</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
+ if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 3.1</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
  if(D.a==='share'){shareSummary();return}
  if(D.a==='flt'){fltPage();return}
  if(D.a==='per'){perPage();return}
