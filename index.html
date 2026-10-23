@@ -181,8 +181,106 @@ label.lbad{color:var(--bad)}
 .cg>*{min-width:0}.cd{max-width:100%;overflow-wrap:anywhere}
 .sl{display:flex;flex-direction:column;gap:8px}.sli{display:flex;flex-direction:column;gap:0}.sli b{font-weight:500;font-size:19px}.sli .mut2{font-size:16px}
 @media (max-width:389px){.cg{grid-template-columns:1fr}}
+/* ===== Carnet de bord v3 ===== */
+:root{--bg:#ecebf5;--fg:#14172b;--mut:#6b6f85;--sf:#e3e2ef;--line:#dcdbe9;--ink:#14172b;--lime:#d6f23a;--peri:#8c90ea;--card:#fff;--bar2:#14172b;--ok:#1f9d55;--bad:#e5484d;--ac:#14172b;--hd:#14172b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0d19;--fg:#f1f2fa;--mut:#9a9fbb;--sf:#1a1d31;--line:#262a45;--ink:#222750;--card:#151829;--bar2:#eef0ff;--ok:#4ade80;--bad:#fb7185;--hd:#222750}}
+:root[data-theme="dark"]{--bg:#0b0d19;--fg:#f1f2fa;--mut:#9a9fbb;--sf:#1a1d31;--line:#262a45;--ink:#222750;--card:#151829;--bar2:#eef0ff;--ok:#4ade80;--bad:#fb7185;--hd:#222750}
+body,body[data-tab]{--hd:var(--ink);background:var(--bg);color:var(--fg);font-family:"Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--bg);color:var(--fg);padding:14px 16px 8px;gap:10px;border-radius:0;box-shadow:none}
+header .car{background:var(--card);color:var(--fg);border:0;border-radius:999px;padding:6px 16px 6px 6px;box-shadow:0 2px 10px rgba(20,23,43,.07);min-height:50px}
+.av{background:var(--ink);color:var(--lime);width:36px;height:36px}
+.car b{font-weight:800;font-size:17px}.car small{color:var(--mut);opacity:1;font-size:12.5px}
+header .ib,.hb{background:var(--card);color:var(--fg);border-radius:50%;width:44px;height:44px;min-width:44px;box-shadow:0 2px 10px rgba(20,23,43,.07);font-size:18px;margin-left:2px}
+.bg{background:var(--lime);color:var(--ink)}
+main{padding:0 16px 130px}
+.sr{background:var(--bg)}.sr input{border-radius:999px;border:0;background:var(--card)}
+/* hero */
+.nzh{background:var(--ink);color:#fff;border-radius:28px;padding:18px 22px;margin-top:4px}
+.nzh small{display:block;letter-spacing:.14em;font-size:11.5px;color:#aab0cf;font-weight:700}
+.nzh .big{font-size:clamp(42px,15vw,60px);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-top:6px}
+.nzh .big i{font-style:normal;font-size:22px;color:var(--lime);margin-left:6px;letter-spacing:0}
+.nzh.r{margin-top:14px}.nzh2{display:flex;justify-content:space-between;align-items:center;gap:8px}.nzh.r .big{font-size:clamp(38px,13vw,52px)}
+.nzg{display:flex;gap:8px;margin-top:14px}.nzg div{flex:1;background:rgba(255,255,255,.1);border-radius:14px;padding:8px 10px;font-weight:800;font-size:16px}.nzg small{font-size:10px;letter-spacing:.04em}
+.nzbd{background:var(--card);border-radius:999px;padding:3px 10px;font-weight:800;font-size:12px}.nzbd.up{color:var(--bad)}.nzbd.dn{color:var(--ok)}
+.fb{padding:12px 0 0}.fb button{background:var(--card);border:0;border-radius:999px;min-height:38px;font-weight:700;font-size:14px;box-shadow:0 2px 10px rgba(20,23,43,.06)}
+.rh{margin:18px 4px 8px;font-size:12px;letter-spacing:.16em;color:var(--mut);font-weight:800}
+.rstrip{border:0;padding:0 0 4px;gap:10px}
+.nzc,.nzr{background:var(--card);color:var(--fg);border:0;border-radius:22px;text-align:left;font:inherit}
+.nzc{flex:0 0 auto;min-width:200px;max-width:250px;padding:12px 14px}
+.nzt{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px}
+.nzi{width:28px;height:28px;border-radius:50%;display:inline-grid;place-items:center;font-size:13px;color:var(--lime);flex:none}.nzi svg{width:15px;height:15px}
+.nzs{color:var(--mut);font-size:12.5px;margin:3px 0 8px}
+.nzl{display:inline-block;border-radius:13px;padding:6px 11px;font-weight:800;font-size:15px;margin:0 6px 4px 0;vertical-align:top}
+.nzl small{display:block;font-weight:700;font-size:10.5px;opacity:.75}
+.nzl.g{background:#d7f5df;color:#12683a}.nzl.o{background:#ffe5c4;color:#964a00}.nzl.b{background:#dfe2ff;color:#2a34b5}.nzl.r{background:#ffdcdf;color:#b4232d}
+:root[data-theme="dark"] .nzl.g,:root:not([data-theme="light"]) .nzl.g{}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nzl.g{background:#173a27;color:#7ee2a2}:root:not([data-theme="light"]) .nzl.o{background:#40290c;color:#ffc27a}:root:not([data-theme="light"]) .nzl.b{background:#1d2354;color:#aab4ff}:root:not([data-theme="light"]) .nzl.r{background:#46161b;color:#ff9aa3}}
+:root[data-theme="dark"] .nzl.g{background:#173a27;color:#7ee2a2}:root[data-theme="dark"] .nzl.o{background:#40290c;color:#ffc27a}:root[data-theme="dark"] .nzl.b{background:#1d2354;color:#aab4ff}:root[data-theme="dark"] .nzl.r{background:#46161b;color:#ff9aa3}
+/* timeline */
+.tl{padding-left:44px;margin-top:14px}
+.tl::before{left:15px;top:6px;bottom:0;width:0;background:none;border-left:2px dashed var(--line);border-radius:0}
+.tl::after{display:none}
+.tl>.it{display:block;position:relative;padding:0;margin:0 0 10px;text-align:left;width:100%;background:none;border:0;color:inherit}
+.tl>.it>.ic{position:absolute;left:-44px;top:14px;width:32px;height:32px;margin:0;box-shadow:0 0 0 5px var(--bg);background-image:none;color:var(--lime);font-size:16px}
+.tl>.it>.bd{background:var(--card);border:0;border-radius:22px;padding:12px 16px;box-shadow:none}
+.l1{font-size:17px;font-weight:800}.l1 em{font-style:normal;font-size:11px;color:var(--mut);font-weight:700;margin-left:3px}
+.nzd{color:var(--mut);font-size:12.5px;margin-top:2px}
+.l2{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px;color:var(--mut);font-size:12.5px}
+.nzpill{background:var(--bar2);color:var(--bg);border-radius:999px;padding:3px 10px;font-weight:800;font-size:12.5px}
+.nzm{background:#e0e1fa;border-radius:22px;padding:12px 16px;margin:0 0 10px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nzm{background:#1b1f45}}
+:root[data-theme="dark"] .nzm{background:#1b1f45}
+.nzmh{display:flex;justify-content:space-between;align-items:center}.nzmh b{color:#4348c2;letter-spacing:.12em;font-size:12px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nzmh b{color:#a9b0ff}}
+:root[data-theme="dark"] .nzmh b{color:#a9b0ff}
+.nzk{display:flex;gap:6px;margin-top:8px}.nzk div{flex:1;background:rgba(255,255,255,.7);border-radius:12px;padding:6px 8px;font-weight:800;font-size:14px;min-width:0}.nzk small{display:block;color:var(--mut);font-size:10px;font-weight:700}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nzk div{background:rgba(255,255,255,.07)}}
+:root[data-theme="dark"] .nzk div{background:rgba(255,255,255,.07)}
+.nzm p{font-size:12px;color:var(--mut);margin:8px 0 0}.nzm p b{color:var(--fg)}
+/* nav */
+nav{left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));height:66px;border-radius:999px;background:var(--ink);border:0;padding:0 8px;box-shadow:0 14px 30px rgba(20,23,43,.4);display:flex;align-items:center}
+nav div{display:block;width:auto;max-width:none;margin:0}
+nav{display:grid;grid-template-columns:1.2fr 1.2fr 62px 1.2fr 1fr;gap:2px}
+nav>div{margin:0;display:grid;place-items:center}
+nav button.t{background:none;color:#8f94b3;min-height:50px;border-radius:999px;font-size:10.5px;font-weight:700;gap:2px;padding:0 6px}
+nav button.t svg{width:20px;height:20px;fill:currentColor}
+nav button.t span{background:none!important;padding:0;font-size:10.5px;border-radius:0}
+nav button.t[aria-current="true"]{background:var(--lime);color:#14172b;font-weight:800}
+.fab{width:46px;height:46px;border-radius:50%;background:#fff;color:#14172b;font-size:28px;font-weight:600;margin:0;box-shadow:none;display:grid;place-items:center;line-height:1}
+.menu{background:var(--card);color:var(--fg);border-radius:24px;bottom:calc(98px + env(safe-area-inset-bottom,0px))}.menu button{color:var(--fg)}
+/* reports */
+.rt{background:var(--bg);border:0;margin:0 -16px;padding:0 10px}
+.rt button{color:var(--mut);font-weight:800;font-size:15px;padding:0 14px;min-height:48px}
+.rt button[aria-current="true"],.rt button[data-rt=plein][aria-current="true"]{color:var(--fg);border-bottom-color:var(--lime);border-bottom-width:4px}
+.rp{background:var(--bg);margin:0 -16px;padding:6px 16px 20px}
+.dr{background:var(--card);border-radius:22px;box-shadow:none}
+.cd{background:var(--card);border-radius:26px;box-shadow:none}
+.nzp{background:var(--card);border-radius:26px;padding:14px 16px;margin-top:14px}
+.nzph{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:17px}
+.nzph .lg{font-size:11px;color:var(--mut);font-weight:700}.lg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 3px 0 6px}
+i.a{background:var(--peri)}i.b{background:var(--bar2)}
+.nzkk{font-size:10.5px;letter-spacing:.1em;color:var(--mut);font-weight:800;margin:12px 0 4px}
+.nzb{display:flex;align-items:center;gap:8px;margin:3px 0}.nzb i{display:block;height:8px;border-radius:5px;flex:none}.nzb span{font-size:12px;font-weight:800}
+.lg2{font-size:11px;color:var(--mut)}
+.nzbars{display:flex;align-items:flex-end;gap:10px;height:120px;margin-top:22px}
+.nzbars div{flex:1;border-radius:10px 10px 4px 4px;position:relative;min-width:0}.nzbars .a{background:var(--peri)}.nzbars .b{background:var(--bar2)}
+.nzbars span{position:absolute;top:-17px;left:-4px;right:-4px;text-align:center;font-weight:800;font-size:11px;color:var(--fg)}
+/* rappels */
+.rl{margin:12px 0 0}
+.nzr{display:block;width:100%;padding:14px 16px;margin-bottom:12px}
+.nzr .nzs{margin:2px 0 10px 36px}.nzls{display:flex;gap:8px}.nzls .nzl{flex:1;font-size:19px;padding:8px 14px;margin:0}.nzls small{font-size:11px}
+.nzadd{display:block;width:100%;border:2px dashed var(--line);background:none;color:var(--mut);border-radius:22px;padding:14px;font-weight:800;font-size:15px}
+/* pages, forms */
+.ph,.ph.t,.ph.pu,.ph:not(.t):not(.pu){background:var(--ink);color:#fff;border-radius:0 0 26px 26px;box-shadow:none}
+.pill,.pb .pill{background:var(--lime);color:#14172b;box-shadow:none;font-weight:800}
+.more{color:var(--fg)}
+.sw:checked{background:var(--lime)!important}.sw:checked::after{background:#14172b}
+.btn{background:var(--ink);color:#fff;border-radius:14px}.btn.g{background:var(--sf);color:var(--fg)}
+.sheet{border-radius:28px 28px 0 0;background:var(--bg)}.sheet .bd{background:none;padding:0;box-shadow:none}
+.toast{background:var(--ink)}
+input,select,textarea{background:var(--card)}
 </style>
-<meta name="theme-color" content="#00747c">
+<meta name="theme-color" content="#14172b">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 </head>
@@ -261,17 +359,24 @@ function mstat(d,m){
  return{cost:es.reduce((a,x)=>a+amt(x),0),dist:ks.length?Math.max(...ks)-base:0,aut:rs.length?rs.reduce((a,b)=>a+b,0)/rs.length:null,avg:cs.length?cs.reduce((a,b)=>a+b,0)/cs.length:null};
 }
 function prevKey(m){const x=new Date(m+'-01T00:00');x.setMonth(x.getMonth()-1);return ymd(x).slice(0,7)}
+const PUMP='<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.21v7.21c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v16h10v-7.5h1.5v5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V9c0-.69-.28-1.32-.73-1.77zM12 10H6V5h6v5z"/></svg>';
+const NV={h:'<svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h18v2H3z"/></svg>',r:'<svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8v4h2V4h-7v2h4l-6 6-4-4-8 8z"/></svg>',a:'<svg viewBox="0 0 24 24"><path d="M12 22a2 2 0 002-2h-4a2 2 0 002 2zm6-6v-5c0-3-1.6-5.4-4.5-6V4a1.5 1.5 0 00-3 0v1C7.6 5.6 6 8 6 11v5l-2 2v1h16v-1z"/></svg>',p:'<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>'};
+const tndH=v=>nf(v,3)+'<em>TND</em>';
+function tileOf(txt,cls){const m=String(txt).match(/^(Dans|Dépassé de|En retard de)\s+(.*)$/);return `<span class="nzl ${cls}">${m?'<small>'+m[1]+'</small>'+m[2]:txt}</span>`}
+function rtiles(z,auto){return z.rows.map(r=>tileOf(r.txt,r.st==='late'?'r':r.st==='warn'?'o':(z.kind==='entretien'?'o':(auto?'g':'b')))).join('')}
+function heroKm(d){const c=d.c;return `<div class="nzh"><small>KILOMÉTRAGE · ${esc((c.model||c.name).toUpperCase())}</small><div class="big">${nf(d.cur,0)}<i>km</i></div></div>`}
 function row(d,x){
  const [ic,col,lab]=IC[x.t];let a='',b='',r='';
- if(x.t==='plein'){a=x.fuel||d.c.fuel;r=tnd(pt(x));b=`${kmf(x.km)}${d.cons[x.id]?' · <b>'+nf(d.cons[x.id],3)+' L/100km</b>':''} · ${nf(x.l,3)} L`}
- else if(x.t==='entretien'){a=x.svc;r=x.cost?tnd(x.cost):'';b=[x.km?kmf(x.km):'',x.note].filter(Boolean).map(esc).join(' · ')}
- else if(x.t==='depense'){a=x.cat;r=tnd(x.cost||0);b=[x.km?kmf(x.km):'',x.note].filter(Boolean).map(esc).join(' · ')}
- else if(x.t==='revenu'){a=x.cat;r='<span style="color:var(--ok)">+'+tnd(x.cost||0)+'</span>';b=[x.km?kmf(x.km):'',x.note].filter(Boolean).map(esc).join(' · ')}
+ if(x.t==='plein'){a=x.fuel||d.c.fuel;r=tnd(pt(x));b=`<span>${kmf(x.km)}</span>${d.cons[x.id]?'<span class="nzpill">'+nf(d.cons[x.id],3)+' L/100km</span>':''}<span>${nf(x.l,3)} L</span>`}
+ else if(x.t==='entretien'){a=x.svc;r=x.cost?tnd(x.cost):'';b=[x.km?kmf(x.km):'',x.note].filter(Boolean).map(s=>'<span>'+esc(s)+'</span>').join('')}
+ else if(x.t==='depense'){a=x.cat;r=tnd(x.cost||0);b=[x.km?kmf(x.km):'',x.note].filter(Boolean).map(s=>'<span>'+esc(s)+'</span>').join('')}
+ else if(x.t==='revenu'){a=x.cat;r='<span style="color:var(--ok)">+'+tnd(x.cost||0)+'</span>';b=[x.km?kmf(x.km):'',x.note].filter(Boolean).map(s=>'<span>'+esc(s)+'</span>').join('')}
  else if(x.t==='releve'){a='Relevé';b=kmf(x.km)}
  else if(x.t==='itineraire'){a='Itinéraire';b=`${kmf(x.km0)} → ${kmf(x.km)} · ${kmf(x.km-x.km0)} · ${esc(x.cat)}`}
  else if(x.t==='rappel'){a=esc(x.title);b=[x.nd?dlong(x.nd):'',x.nk?kmf(x.nk):''].filter(Boolean).join(' · ')}
  else if(x.t==='liste'){a=esc(x.title);b=x.items.filter(i=>i.d).length+'/'+x.items.length+' terminés'}
- return `<button class="it" data-open="${x.id}"><div class="ic" style="background:${col}">${ic}</div><div class="bd"><div class="l1"><span>${esc(a)}</span><span>${r}</span></div><div class="l2"><span>${b}</span><span>${dshort(x.date)}</span></div></div></button>`;
+ const pl=x.t==='plein';r=String(r).replace(/ TND/g,'<em>TND</em>');
+ return `<button class="it" data-open="${x.id}"><div class="ic" style="background:${pl?'var(--ink)':col}">${pl?PUMP:ic}</div><div class="bd"><div class="l1"><span>${esc(a)}</span><span>${r}</span></div><div class="nzd">${dshort(x.date)}</div>${b?`<div class="l2">${b}</div>`:''}</div></button>`;
 }
 function autoAvg(d){const v=d.ivs.slice(-5);return v.length?{km:v.reduce((a,b)=>a+b.km,0)/v.length,days:v.reduce((a,b)=>a+b.days,0)/v.length}:null}
 function nextFill(d){
@@ -281,13 +386,11 @@ function nextFill(d){
 }
 function remStrip(d){
  const cards=[],T=new Date(today()+'T00:00'),nf_=nextFill(d);
- const stat=(nk,nd)=>{const p=[];
-  if(nk){const l=nk-d.cur;p.push(`<span class="st-${l<0?'late':'ok'}">${l>=0?'Dans '+nf(l,0)+' km':'Dépassé de '+nf(-l,0)+' km'}</span>`)}
-  if(nd){const j=Math.round((new Date(nd+'T00:00')-T)/864e5);p.push(`<span class="st-${j<0?'late':'ok'}">${j===0?"Aujourd'hui":j>0?'Dans '+j+' j':'Il y a '+(-j)+' j'}</span>`)}
-  return p.join(' · ')};
- if(nf_)cards.push(`<div class="rk" style="border-left-color:#43a047"><div class="rkn"><span class="rci" style="background:#43a047">⛽</span>Plein suivant</div><div class="rkb">${[nf(nf_.nk,0)+' km',nf_.nd?dshort(nf_.nd):''].filter(Boolean).join(' · ')}</div><div class="rkc">${stat(nf_.nk,nf_.nd)}</div></div>`);
- remItems(d).slice(0,6).forEach(z=>{const k=z.rows.find(r=>r.ic==='🔢'),dd=z.rows.find(r=>r.ic==='📅'),col=z.kind==='entretien'?'#795548':'#e64a19';
-  cards.push(`<button class="rk" style="border-left-color:${col}" ${z.auto?'data-open':'data-rem'}="${z.id}"><div class="rkn"><span class="rci" style="background:${col}">${z.kind==='entretien'?'🔧':'💳'}</span>${esc(z.type)}</div><div class="rkb">${[k?k.label:'',dd?dd.label:''].filter(Boolean).join(' · ')}</div><div class="rkc">${z.rows.map(r=>`<span class="st-${r.st}">${r.txt}</span>`).join(' · ')}</div></button>`)});
+ const ico=(bg,t)=>`<span class="nzi" style="background:${bg}">${t}</span>`;
+ if(nf_){const l=nf_.nk-d.cur,j=nf_.nd?Math.round((new Date(nf_.nd+'T00:00')-T)/864e5):null;
+  cards.push(`<div class="nzc"><div class="nzt">${ico('var(--ink)',PUMP)}Plein suivant</div><div class="nzs">${[nf(nf_.nk,0)+' km',nf_.nd?dshort(nf_.nd):''].filter(Boolean).join(' · ')}</div>${tileOf(l>=0?'Dans '+nf(l,0)+' km':'Dépassé de '+nf(-l,0)+' km',l<0?'r':'g')}${j===null?'':tileOf(j===0?"Aujourd'hui":j>0?'Dans '+j+' j':'Il y a '+(-j)+' j',j<0?'r':'g')}</div>`)}
+ remItems(d).slice(0,6).forEach(z=>{const k=z.rows.find(r=>r.ic==='🔢'),dd=z.rows.find(r=>r.ic==='📅'),en=z.kind==='entretien';
+  cards.push(`<button class="nzc" ${z.auto?'data-open':'data-rem'}="${z.id}"><div class="nzt">${ico(en?'#7a4b1d':'#3340c9',en?'🔧':'💳')}${esc(z.type)}</div><div class="nzs">${[k?k.label:'',dd?dd.label:''].filter(Boolean).join(' · ')}</div>${rtiles(z,false)}</button>`)});
  return cards.length?`<div class="rh">RAPPELS</div><div class="rstrip">${cards.join('')}</div>`:'';
 }
 function hist(d){
@@ -297,8 +400,8 @@ function hist(d){
  let h=(q?'':remStrip(d))+'<div class="tl">',cm=null;const now=today().slice(0,7);
  es.forEach(x=>{const m=x.date.slice(0,7);
   if(m!==cm&&m<now&&!q){const s=mstat(d,m),p=mstat(d,prevKey(m));
-   let cmp='';if(s.avg&&p.avg){const pc=Math.round(Math.abs(s.avg-p.avg)/p.avg*100);cmp=`<div>Consommation <b style="color:${s.avg<=p.avg?'var(--ok)':'var(--bad)'}">${s.avg<=p.avg?'-':'+'}${pc}%</b> par rapport à ${mname(prevKey(m),{month:'long'})}</div>`}
-   h+=`<div class="mc"><h4>${mname(m,{month:'long',year:'numeric'}).toUpperCase()}</h4><div>${tnd(s.cost)} · ${nf(s.dist,0)} km${s.avg?' · '+nf(s.avg,3)+' L/100km':''}</div>${s.aut?`<div style="color:var(--mut)">Autonomie réelle du réservoir : <b style="color:var(--fg)">${nf(s.aut,0)} km par plein</b></div>`:''}${cmp}</div>`}
+   let bd='';if(s.avg&&p.avg){const pc=Math.round((s.avg-p.avg)/p.avg*100);bd=`<span class="nzbd ${pc>0?'up':'dn'}">${pc>0?'+':''}${pc}%</span>`}
+   h+=`<div class="nzm"><div class="nzmh"><b>${mname(m,{month:'long',year:'numeric'}).toUpperCase()}</b>${bd}</div><div class="nzk"><div><small>TND</small>${nf(s.cost,3)}</div><div><small>km</small>${nf(s.dist,0)}</div>${s.avg?`<div><small>L/100km</small>${nf(s.avg,3)}</div>`:''}</div>${s.aut?`<p>Autonomie réelle du réservoir : <b>${nf(s.aut,0)} km par plein</b></p>`:''}</div>`}
   cm=m;h+=row(d,x)});
  return h+'</div>';
 }
@@ -336,8 +439,10 @@ function remItems(d){
 }
 function remList(d){
  const it=remItems(d);
- if(!it.length)return '<div class="emp">Aucun rappel. Touchez + puis Rappel pour en ajouter un.</div>';
- return '<div class="rl">'+it.map(z=>`<button class="ri" ${z.auto?'data-open':'data-rem'}="${z.id}"><span class="rc" style="color:${z.kind==='entretien'?'#795548':'#e64a19'}">${ICO[z.kind]}</span><span class="rb"><span class="rtt">${esc(z.type)}</span>${z.rows.map(r=>`<span class="rw"><span class="rlb"><span class="gi" aria-hidden="true">${r.ic}</span> ${r.label}</span><span class="st-${r.st}">${r.txt}</span></span>`).join('')}</span></button>`).join('')+'</div>';
+ const add='<button class="nzadd" data-new="rappel">+ Ajouter un rappel</button>';
+ if(!it.length)return '<div class="emp">Aucun rappel. Touchez + puis Rappel pour en ajouter un.</div>'+add;
+ return '<div class="rl">'+it.map(z=>{const en=z.kind==='entretien',k=z.rows.find(r=>r.ic==='🔢'),dd=z.rows.find(r=>r.ic==='📅');
+  return `<button class="nzr" ${z.auto?'data-open':'data-rem'}="${z.id}"><div class="nzt"><span class="nzi" style="background:${en?'#7a4b1d':'#3340c9'}">${en?'🔧':'💳'}</span>${esc(z.type)}</div><div class="nzs">${[k?k.label:'',dd?dd.label:''].filter(Boolean).join(' · ')}</div><div class="nzls">${rtiles(z,false)}</div></button>`}).join('')+'</div>'+add;
 }
 let rtried=false;
 function rappelForm(x){
@@ -573,6 +678,19 @@ function pleinCards(d,R){
  }
  return h;
 }
+function cap(t){return t.charAt(0).toUpperCase()+t.slice(1)}
+function genInsights(d){
+ const ms=[...new Set(d.e.filter(x=>x.t!=='rappel').map(x=>x.date.slice(0,7)))].sort();if(!ms.length)return '';
+ const m=ms[ms.length-1],pm=prevKey(m),s=mstat(d,m),has=ms.includes(pm),p=has?mstat(d,pm):null;
+ let bd='';if(p&&s.avg&&p.avg){const pc=Math.round((s.avg-p.avg)/p.avg*100);bd=`<span class="nzbd w ${pc>0?'up':'dn'}">${pc>0?'+':''}${pc}% vs ${mname(pm,{month:'long'})}</span>`}
+ let h=`<div class="nzh r"><div class="nzh2"><small>${mname(m,{month:'long',year:'numeric'}).toUpperCase()}</small>${bd}</div><div class="big">${s.avg?nf(s.avg,3):'–'}<i>L/100km</i></div><div class="nzg"><div><small>TND</small>${nf(s.cost,3)}</div><div><small>km</small>${nf(s.dist,0)}</div><div><small>km par plein</small>${s.aut?nf(s.aut,0):'–'}</div></div></div>`;
+ if(p){const defs=[['DÉPENSE (TND)',p.cost,s.cost,v=>nf(v,3)],['DISTANCE (KM)',p.dist,s.dist,v=>nf(v,0)],['CONSOMMATION (L/100KM)',p.avg,s.avg,v=>nf(v,3)],['AUTONOMIE RÉELLE (KM PAR PLEIN)',p.aut,s.aut,v=>nf(v,0)]].filter(z=>z[1]||z[2]);
+  if(defs.length)h+=`<div class="nzp"><div class="nzph"><span>${cap(mname(pm,{month:'long'}))} vs ${mname(m,{month:'long'})}</span><span class="lg"><i class="a"></i>${mname(pm,{month:'short'})} <i class="b"></i>${mname(m,{month:'short'})}</span></div>${defs.map(z=>{const mx=Math.max(z[1]||0,z[2]||0)||1,w=v=>Math.max(2,(v||0)/mx*72);
+   return `<div class="nzkk">${z[0]}</div><div class="nzb"><i class="a" style="width:${w(z[1])}%"></i><span>${z[1]?z[3](z[1]):'–'}</span></div><div class="nzb"><i class="b" style="width:${w(z[2])}%"></i><span>${z[2]?z[3](z[2]):'–'}</span></div>`}).join('')}</div>`}
+ const fl=d.f.filter(x=>d.cons[x.id]).slice(-6);
+ if(fl.length>=2){const mx=Math.max(...fl.map(x=>d.cons[x.id]));
+  h+=`<div class="nzp"><div class="nzph"><span>Consommation par plein</span></div><div class="lg2">L/100km</div><div class="nzbars">${fl.map((x,i)=>`<div class="${i===fl.length-1?'b':'a'}" style="height:${Math.max(18,d.cons[x.id]/mx*100)}%"><span>${nf(d.cons[x.id],3)}</span></div>`).join('')}</div></div>`}
+ return h}
 function reports(d){
  const R=rstats(d),e=R.e;
  const pb=`<button class="ib" style="color:${C.teal};min-width:44px;min-height:44px" data-a="per" aria-label="Choisir la période">${SC}</button>`;
@@ -587,7 +705,7 @@ function reports(d){
  const grid=(...c)=>`<div class="cg">${c.join('')}</div>`;
  if(rtab==='gen'){
   const bal=rev-cost;
-  h+=grid(card(bal<0?'↘':'↗',C.teal,'Bilan',tnd(Math.abs(bal)),per_(Math.abs(bal))),
+  h+=genInsights(d)+grid(card(bal<0?'↘':'↗',C.teal,'Bilan',tnd(Math.abs(bal)),per_(Math.abs(bal))),
    card('📍',C.dist,'Distance',nf(dist,0)+' km',[['Moyenne journalière',nf(dist/days,0)+' km']]),
    card('↘',C.dep,'Coût',tnd(cost),per_(cost)),
    card('↗',C.rev,'Le revenu',tnd(rev),per_(rev)));
@@ -616,11 +734,11 @@ function render(){
  $('#hd').innerHTML=`<button class="car" data-a="cars"><div class="av">${c?esc(c.name[0].toUpperCase()):'+'}</div><div><b>${c?esc(c.name):'Ajouter une voiture'}</b><small>${c?esc((c.model||c.fuel)+' · '+kmf(d.cur)):'Touchez ici'}</small></div></button>${hbtn()}`;
  $('#sr').innerHTML=sch?`<div class="sr" style="background:var(--hd)"><input id="q" value="${esc(q)}" placeholder="Rechercher" aria-label="Rechercher"></div>`:'';
  if(sch&&!$('#q').dataset.f){$('#q').dataset.f=1;$('#q').focus()}
- $('#nav').innerHTML=`<button class="t" data-t="hist" aria-current="${tab==='hist'}"><span>☰</span>Historique</button><button class="t" data-t="rap" aria-current="${tab==='rap'}"><span>📈</span>Rapports</button><div><button class="fab ${menu?'on':''}" data-a="fab" aria-label="Ajouter">+</button></div><button class="t" data-t="rem" aria-current="${tab==='rem'}"><span>⏰</span>Rappels</button><button class="t" data-t="plus" aria-current="${tab==='plus'}"><span>⋯</span>Plus</button>`;
+ $('#nav').innerHTML=`<button class="t" data-t="hist" aria-current="${tab==='hist'}">${NV.h}<span>Historique</span></button><button class="t" data-t="rap" aria-current="${tab==='rap'}">${NV.r}<span>Rapports</span></button><div><button class="fab ${menu?'on':''}" data-a="fab" aria-label="Ajouter">+</button></div><button class="t" data-t="rem" aria-current="${tab==='rem'}">${NV.a}<span>Rappels</span></button><button class="t" data-t="plus" aria-current="${tab==='plus'}">${NV.p}<span>Plus</span></button>`;
  $('#mn').innerHTML=menu?`<div class="scrim" data-a="fab"></div><div class="menu">${ORDER.map(k=>`<button data-new="${k}"><div class="ic" style="background:${IC[k][1]}">${IC[k][0]}</div>${IC[k][2]}</button>`).join('')}</div>`:'';
  let h='';
  if(!d)h='<div class="emp"><p>Ajoutez votre voiture pour commencer.</p><button class="btn" data-a="addcar">Ajouter une voiture</button> <button class="btn g" data-a="imp">Importer une sauvegarde</button></div>';
- else if(tab==='hist')h=fbar()+hist(d);
+ else if(tab==='hist')h=(q?'':heroKm(d))+fbar()+hist(d);
  else if(tab==='rap')h=reports(d);
  else if(tab==='rem')h=remList(d);
  else h=`<h2>Plus</h2><div class="acts" style="flex-direction:column"><button class="btn g" data-a="addcar">Ajouter une voiture</button><button class="btn g" data-a="theme">Thème clair / sombre</button><button class="btn g" data-a="gd">Google Drive (synchronisation)</button><button class="btn g" data-a="csv">Exporter (CSV)</button><button class="btn g" data-a="json">Sauvegarde complète (JSON)</button><button class="btn g" data-a="imp">Importer</button><button class="btn g" data-a="types">Type d'entretiens</button><button class="btn g" data-a="about">À propos</button></div><p class="mut2" style="text-align:center;margin-top:28px">Créé par Kamel Nasralli</p>`;
@@ -940,7 +1058,7 @@ document.addEventListener('click',e=>{
  if(D.a==='tpdel'){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}
   const o=tpL[+D.i];S.types=(S.types&&S.types.length?S.types:[...DEFTYPES]).filter(x=>x!==o);save();tpPage();return}
  if(D.close&&(t.tagName==='BUTTON'||e.target===t)){close();return}
- if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 2.4</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
+ if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 3.0</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
  if(D.a==='share'){shareSummary();return}
  if(D.a==='flt'){fltPage();return}
  if(D.a==='per'){perPage();return}
