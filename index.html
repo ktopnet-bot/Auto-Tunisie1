@@ -297,7 +297,7 @@ nav{display:block;padding:0 8px}
 nav>div,nav div{display:grid;grid-template-columns:1fr 1fr 64px 1fr 1fr;width:100%;max-width:none;height:100%;align-items:center;justify-items:center;margin:0}
 nav button.t{width:100%}
 @media (max-height:520px){.menu{width:min(440px,calc(100% - 48px));display:grid;grid-template-columns:1fr 1fr;bottom:calc(84px + env(safe-area-inset-bottom,0px));max-height:calc(100% - 100px);overflow:auto}.menu button{font-size:15px;min-height:36px}nav{height:58px;bottom:calc(10px + env(safe-area-inset-bottom,0px))}}
-</style>
+.nzh .nzg{margin-top:12px;gap:6px}.nzh .nzg div{padding:8px 8px;font-size:15px;min-width:0}.nzh .nzg small{margin:0 0 2px;font-size:9.5px;letter-spacing:.06em}.nzu{font-size:10.5px;color:#aab0cf;margin-top:8px;text-align:right}.nzh .big{font-size:clamp(40px,13vw,54px)}</style>
 </head>
 <body>
 <header id="hd"></header>
@@ -379,7 +379,11 @@ const NV={h:'<svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h18v2
 const tndH=v=>nf(v,3)+'<em>TND</em>';
 function tileOf(txt,cls){const m=String(txt).match(/^(Dans|Dépassé de|En retard de)\s+(.*)$/);return `<span class="nzl ${cls}">${m?'<small>'+m[1]+'</small>'+m[2]:txt}</span>`}
 function rtiles(z,auto){return z.rows.map(r=>tileOf(r.txt,r.st==='late'?'r':r.st==='warn'?'o':(z.kind==='entretien'?'o':(auto?'g':'b')))).join('')}
-function heroKm(d){const c=d.c;return `<div class="nzh"><small>KILOMÉTRAGE · ${esc((c.model||c.name).toUpperCase())}</small><div class="big">${nf(d.cur,0)}<i>km</i></div></div>`}
+function heroKm(d){const c=d.c;const ids=d.f.filter(x=>d.cons[x.id]),v=ids.map(x=>d.cons[x.id]);
+ const rg=ids.map(x=>d.rng[x.id]).filter(Boolean);
+ const t=(l,x)=>`<div><small>${l}</small>${x}</div>`;
+ const g=v.length?`<div class="nzg">${t('MOYENNE',nf(v.reduce((a,b)=>a+b,0)/v.length,2))}${t('DERNIER',nf(v[v.length-1],2))}${t('MEILLEUR',nf(Math.min(...v),2))}${rg.length?t('KM/PLEIN',nf(rg.reduce((a,b)=>a+b,0)/rg.length,0)):''}</div><div class="nzu">Consommation en L/100km · km/plein = autonomie moyenne</div>`:'';
+ return `<div class="nzh"><small>KILOMÉTRAGE · ${esc((c.model||c.name).toUpperCase())}</small><div class="big">${nf(d.cur,0)}<i>km</i></div>${g}</div>`}
 function row(d,x){
  const [ic,col,lab]=IC[x.t];let a='',b='',r='';
  if(x.t==='plein'){a=x.fuel||d.c.fuel;r=tnd(pt(x));b=`<span>${kmf(x.km)}</span>${d.cons[x.id]?'<span class="nzpill">'+nf(d.cons[x.id],3)+' L/100km</span>':''}<span>${nf(x.l,3)} L</span>`}
@@ -1073,7 +1077,7 @@ document.addEventListener('click',e=>{
  if(D.a==='tpdel'){if(!t.dataset.arm){t.dataset.arm=1;t.textContent='Confirmer ?';return}
   const o=tpL[+D.i];S.types=(S.types&&S.types.length?S.types:[...DEFTYPES]).filter(x=>x!==o);save();tpPage();return}
  if(D.close&&(t.tagName==='BUTTON'||e.target===t)){close();return}
- if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 3.1</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
+ if(D.a==='about'){$('#ov').innerHTML=`<div class="pg"><div class="ph t"><button class="ib" data-close="1" aria-label="Retour">←</button><span>À propos</span></div><div class="pb" style="text-align:center;padding-top:40px"><div style="font-size:64px" aria-hidden="true">🚗</div><h2 style="font-size:28px;margin:10px 0 4px">Auto Tunisie</h2><div class="mut2">Version 3.2</div><p style="margin:24px 0;font-size:18px">Suivez la consommation, les pleins, l'entretien et les dépenses de votre voiture, en dinars tunisiens (TND).</p><hr style="border:0;border-top:1px solid var(--line)"><div class="mut2" style="margin-top:20px">Créé par</div><div style="font-size:24px;font-weight:500;margin-top:4px">Kamel Nasralli</div></div></div>`;return}
  if(D.a==='share'){shareSummary();return}
  if(D.a==='flt'){fltPage();return}
  if(D.a==='per'){perPage();return}
